@@ -1,10 +1,14 @@
 import { RecipePage } from "./RecipePage";
 
-export const RecipeListPage = (recipes) => {
+export const RecipeListPage = (props) => {
   return (
     <>
-      {recipes.recipes.map((recept) => (
-        <RecipePage key={recept.recipe.label} recipe={recept}></RecipePage>
+      {props.recipes.map((recept) => (
+        <RecipePage
+          key={recept.recipe.label}
+          recipe={recept.recipe}
+          pageState={props.pageState}
+        ></RecipePage>
       ))}
     </>
   );

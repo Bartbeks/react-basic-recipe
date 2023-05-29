@@ -16,14 +16,14 @@ export const App = () => {
     <>
       <Flex>
         <RecipePage
-          pageState={setPageStatet}
-          backBtn={HandlePageState}
+          pageState={pageState}
+          // backBtnFn={HandlePageState}
         ></RecipePage>
       </Flex>
     </>
   ) : (
     <>
-      <RecipeSearch pageState={setPageStatet} />
+      <RecipeSearch pageState={HandlePageState} />
     </>
   );
 };

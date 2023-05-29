@@ -2,12 +2,12 @@ import { SearchInput } from "../components/ui/textinput";
 import { useState } from "react";
 import { RecipeListPage } from "./RecipeListPage";
 import { data } from "../utils/data";
-import { Flex, Heading } from "@chakra-ui/react";
+import { Flex, Heading, Input } from "@chakra-ui/react";
 
-export const RecipeSearch = (pageState) => {
+export const RecipeSearch = (props) => {
   const [searchField, setSearchField] = useState("");
 
-  const HandleChange = (event) => {
+  const handleChange = (event) => {
     setSearchField(event.target.value);
   };
 
@@ -26,9 +26,12 @@ export const RecipeSearch = (pageState) => {
         mr={"150px"}
       >
         <Heading mb={"15px"}>Search Recipes: </Heading>
-        <SearchInput onChange={HandleChange}></SearchInput>
+        <SearchInput changeFn={handleChange}></SearchInput>
         <Flex justifyContent={"space-evenly"} flexWrap={"wrap"}>
-          <RecipeListPage recipes={matchedRecipes} pagestate={pageState} />
+          <RecipeListPage
+            recipes={matchedRecipes}
+            pageState={props.pageState}
+          />
         </Flex>
       </Flex>
     </>

@@ -11,38 +11,43 @@ import {
   ButtonGroup,
   Button,
 } from "@chakra-ui/react";
+import { RecipeCard } from "../components/ui/card";
 // klikfunctio allen zonder curlybrakets
-export const RecipePage = ({ recipe }, backBtn) => {
+export const RecipePage = (props) => {
+  let test = "fiest";
+  const setRecipe = (arg) => {
+    test = arg.label;
+    props.pageState(true);
+  };
   // pageState = { setPageState };
   // backBtn = { setPageStatet };
-  // let objRetrievedRecipes = { ...recipe.recpe };
-  // const array = [...recipe];
-  // console.log(objRetrievedRecipes.recipe);
+
   return (
     <>
       <h1>recipePage</h1>
-      <div onClick={() => setRecipe(recipe)}>
-        <Card maxW="sm" key={recipe.recipe.label}>
+      <div onClick={() => setRecipe(props.recipe)}>
+        <Card maxW="sm" key={props.recipe.label}>
+          {props.recipe.label}
           <CardBody>
             <CardHeader>
-              <Heading size="md" test={recipe.recipe.label}>
-                {recipe.recipe.label}
+              <Heading size="md" test={props.recipe.label}>
+                {props.recipe.label}
               </Heading>
             </CardHeader>
             <Image
               boxSize="300px"
-              src={recipe.recipe.image}
-              alt={recipe.recipe.label}
+              src={props.recipe.image}
+              alt={props.recipe.label}
               borderRadius="lg"
             />
             <Stack mt="6" spacing="3">
-              <Text>{recipe.recipe.cuisineType}</Text>
-              <Text>{recipe.recipe.mealType}</Text>
-              <Text>{recipe.recipe.dietLabels}</Text>
+              <Text>{props.recipe.cuisineType}</Text>
+              <Text>{props.recipe.mealType}</Text>
+              <Text>{props.recipe.dietLabels}</Text>
               <Text color="blue.600" fontSize="2xl">
-                {recipe.recipe.dishType}
+                {props.recipe.dishType}
               </Text>
-              {recipe.recipe.cautions.map((caution, subIndex) => (
+              {props.recipe.cautions.map((caution, subIndex) => (
                 <Text key={subIndex}>{caution}</Text>
               ))}
             </Stack>
@@ -63,6 +68,7 @@ export const RecipePage = ({ recipe }, backBtn) => {
             </ButtonGroup>
           </CardFooter>
         </Card>
+        <RecipeCard singleRecipe={test}></RecipeCard>
       </div>
     </>
   );
