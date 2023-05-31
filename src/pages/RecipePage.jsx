@@ -14,10 +14,10 @@ import {
 import { RecipeCard } from "../components/ui/card";
 // klikfunctio allen zonder curlybrakets
 export const RecipePage = (props) => {
-  let test = "fiest";
   const setRecipe = (arg) => {
-    test = arg.label;
-    props.pageState(true);
+    let test = arg.label;
+    props.fiets(false);
+    props.fiets2 = arg.label;
   };
   // pageState = { setPageState };
   // backBtn = { setPageStatet };
@@ -68,7 +68,6 @@ export const RecipePage = (props) => {
             </ButtonGroup>
           </CardFooter>
         </Card>
-        <RecipeCard singleRecipe={test}></RecipeCard>
       </div>
     </>
   );

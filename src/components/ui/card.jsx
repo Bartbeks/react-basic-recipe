@@ -1,11 +1,15 @@
 import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
 
 export const RecipeCard = (props) => {
-  console.log(props.singleRecipe);
+  console.log(props);
+
+  const handleState = () => {
+    props.fiets(true);
+  };
   return (
     <>
       <Card key={props.key}>
-        <CardHeader>{props.singleRecipe} recipeCard</CardHeader>
+        <CardHeader onClick={() => handleState()}> recipeCard</CardHeader>
       </Card>
     </>
   );
