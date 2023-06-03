@@ -1,24 +1,31 @@
 import { useState } from "react";
-import { Flex, Heading } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { RecipeSearch } from "./pages/search";
 
-import { RecipePage } from "./pages/RecipePage";
+import { RecipeCard } from "./components/ui/card";
 
 export const App = () => {
-  const [pageState, setPageStatet] = useState(false);
-  let test = pageState;
+  const [pageState, setPageState] = useState(false);
+  const [myRecipe, setRecipe] = useState("");
 
-  const HandlePageState = () => {
-    setPageStatet(true);
-    console.log("button clicked");
+  const HandlePageState = (value, recipe) => {
+    setPageState(value);
+    setRecipe(recipe);
   };
-  return test ? (
+
+  return pageState ? (
     <>
-      <Flex>
-        <RecipePage
-          pageState={pageState}
-          // backBtnFn={HandlePageState}
-        ></RecipePage>
+      <Flex
+        flexDirection={"column"}
+        width={"100vw"}
+        justifyContent={"center"}
+        alignItems={"center"}
+      >
+        <RecipeCard
+          pageState={HandlePageState}
+          backBtnFn={HandlePageState}
+          recipe={myRecipe}
+        ></RecipeCard>
       </Flex>
     </>
   ) : (

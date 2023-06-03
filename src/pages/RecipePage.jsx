@@ -6,69 +6,71 @@ import {
   Stack,
   Image,
   Text,
-  Divider,
-  CardFooter,
-  ButtonGroup,
-  Button,
+  Flex,
+  Badge,
 } from "@chakra-ui/react";
-import { RecipeCard } from "../components/ui/card";
-// klikfunctio allen zonder curlybrakets
+
 export const RecipePage = (props) => {
   const setRecipe = (arg) => {
-    let test = arg.label;
-    props.fiets(false);
-    props.fiets2 = arg.label;
+    return props.pageState(true, arg);
   };
-  // pageState = { setPageState };
-  // backBtn = { setPageStatet };
 
   return (
     <>
-      <h1>recipePage</h1>
-      <div onClick={() => setRecipe(props.recipe)}>
-        <Card maxW="sm" key={props.recipe.label}>
-          {props.recipe.label}
-          <CardBody>
-            <CardHeader>
-              <Heading size="md" test={props.recipe.label}>
-                {props.recipe.label}
-              </Heading>
-            </CardHeader>
-            <Image
-              boxSize="300px"
-              src={props.recipe.image}
-              alt={props.recipe.label}
-              borderRadius="lg"
-            />
-            <Stack mt="6" spacing="3">
-              <Text>{props.recipe.cuisineType}</Text>
-              <Text>{props.recipe.mealType}</Text>
-              <Text>{props.recipe.dietLabels}</Text>
-              <Text color="blue.600" fontSize="2xl">
-                {props.recipe.dishType}
-              </Text>
-              {props.recipe.cautions.map((caution, subIndex) => (
-                <Text key={subIndex}>{caution}</Text>
-              ))}
-            </Stack>
-          </CardBody>
-          <Divider />
-          <CardFooter>
-            <ButtonGroup spacing="2">
-              <Button
-                onClick={() => backBtn()}
-                variant="solid"
-                colorScheme="blue"
+      <Card
+        onClick={() => setRecipe(props.recipe)}
+        maxW="md"
+        key={props.recipe.label}
+        mb={"20px"}
+      >
+        <CardBody>
+          <Image
+            boxSize="420px"
+            src={props.recipe.image}
+            alt={props.recipe.label}
+            width={"100%"}
+            height={{ sm: "100px", md: "400px" }}
+          />
+          <Flex justifyContent={"center"}>
+            <Stack mt="6" spacing="3" justifyContent={"center"}>
+              <Text
+                textTransform={"uppercase"}
+                align={"center"}
+                fontWeight={500}
               >
-                terug
-              </Button>
-              <Button variant="ghost" colorScheme="blue">
-                Add to cart
-              </Button>
-            </ButtonGroup>
-          </CardFooter>
-        </Card>
-      </div>
+                {props.recipe.mealType}
+              </Text>
+              <CardHeader>
+                <Heading size="md">{props.recipe.label}</Heading>
+              </CardHeader>
+              {/* <Badge align={"center"}>{props.recipe.cuisineType}</Badge> */}
+              {props.recipe.dietLabels.length > 0 && (
+                <Badge align={"center"}>
+                  {props.recipe.dietLabels.map((dietLabels, subIndex) => (
+                    <span key={subIndex}>{dietLabels} </span>
+                  ))}
+                </Badge>
+              )}
+              <Text align={"center"}>
+                <b>Dish: </b>
+                <span>{props.recipe.dishType}</span>
+              </Text>
+              {props.recipe.cautions.length > 0 && (
+                <div>
+                  <Text align={"center"} fontWeight={600}>
+                    Cautions
+                  </Text>
+                  <Text align={"center"}>
+                    {props.recipe.cautions.map((caution, subIndex) => (
+                      <span key={subIndex}>{caution} </span>
+                    ))}
+                  </Text>
+                </div>
+              )}
+            </Stack>
+          </Flex>
+        </CardBody>
+      </Card>
     </>
   );
 };
